@@ -36,7 +36,6 @@ config_auto.h
 /doc/*.xml
 
 # generated version file
-/include/tesseract/version.h
 
 # executables
 /tesseract

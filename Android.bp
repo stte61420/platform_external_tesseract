@@ -1,0 +1,139 @@
+//
+// Copyright (C) 2026 The uwuAOSP Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+package {
+    default_applicable_licenses: ["external_tesseract_license"],
+    default_visibility: ["//visibility:public"],
+}
+
+license {
+    name: "external_tesseract_license",
+    license_kinds: ["SPDX-license-identifier-Apache-2.0"],
+    license_text: ["LICENSE"],
+}
+
+cc_library_static {
+    name: "libtesseract",
+    srcs: [
+        "src/api/*.cpp",
+        "src/arch/dotproduct.cpp",
+        "src/arch/dotproductneon.cpp",
+        "src/arch/intsimdmatrix.cpp",
+        "src/arch/intsimdmatrixneon.cpp",
+        "src/arch/simddetect.cpp",
+        "src/ccmain/*.cpp",
+        "src/ccstruct/*.cpp",
+        "src/ccutil/*.cpp",
+        "src/classify/*.cpp",
+        "src/cutil/*.cpp",
+        "src/dict/*.cpp",
+        "src/lstm/*.cpp",
+        "src/textord/*.cpp",
+        "src/viewer/*.cpp",
+        "src/wordrec/*.cpp",
+    ],
+    exclude_srcs: [
+        "src/ccmain/adaptions.cpp",
+        "src/ccmain/docqual.cpp",
+        "src/ccmain/equationdetect.cpp",
+        "src/ccmain/fixspace.cpp",
+        "src/ccmain/fixxht.cpp",
+        "src/ccmain/osdetect.cpp",
+        "src/ccmain/par_control.cpp",
+        "src/ccmain/recogtraining.cpp",
+        "src/ccmain/superscript.cpp",
+        "src/ccmain/tessbox.cpp",
+        "src/ccmain/tfacepp.cpp",
+        "src/ccstruct/fontinfo.cpp",
+        "src/ccstruct/params_training_featdef.cpp",
+        "src/ccutil/ambigs.cpp",
+        "src/ccutil/bitvector.cpp",
+        "src/ccutil/indexmapbidi.cpp",
+        "src/classify/adaptive.cpp",
+        "src/classify/adaptmatch.cpp",
+        "src/classify/blobclass.cpp",
+        "src/classify/cluster.cpp",
+        "src/classify/clusttool.cpp",
+        "src/classify/cutoffs.cpp",
+        "src/classify/featdefs.cpp",
+        "src/classify/float2int.cpp",
+        "src/classify/fpoint.cpp",
+        "src/classify/intfeaturespace.cpp",
+        "src/classify/intfx.cpp",
+        "src/classify/intmatcher.cpp",
+        "src/classify/intproto.cpp",
+        "src/classify/kdtree.cpp",
+        "src/classify/mf.cpp",
+        "src/classify/mfoutline.cpp",
+        "src/classify/mfx.cpp",
+        "src/classify/normfeat.cpp",
+        "src/classify/normmatch.cpp",
+        "src/classify/ocrfeatures.cpp",
+        "src/classify/outfeat.cpp",
+        "src/classify/picofeat.cpp",
+        "src/classify/protos.cpp",
+        "src/classify/shapeclassifier.cpp",
+        "src/classify/shapetable.cpp",
+        "src/classify/tessclassifier.cpp",
+        "src/classify/trainingsample.cpp",
+        "src/dict/hyphen.cpp",
+        "src/dict/permdawg.cpp",
+        "src/wordrec/associate.cpp",
+        "src/wordrec/chop.cpp",
+        "src/wordrec/chopper.cpp",
+        "src/wordrec/drawfx.cpp",
+        "src/wordrec/findseam.cpp",
+        "src/wordrec/gradechop.cpp",
+        "src/wordrec/language_model.cpp",
+        "src/wordrec/lm_consistency.cpp",
+        "src/wordrec/lm_pain_points.cpp",
+        "src/wordrec/lm_state.cpp",
+        "src/wordrec/outlines.cpp",
+        "src/wordrec/params_model.cpp",
+        "src/wordrec/pieces.cpp",
+        "src/wordrec/plotedges.cpp",
+        "src/wordrec/render.cpp",
+        "src/wordrec/segsearch.cpp",
+        "src/wordrec/wordclass.cpp",
+    ],
+    export_include_dirs: [
+        "include",
+        "src/arch",
+        "src/ccmain",
+        "src/ccstruct",
+        "src/ccutil",
+        "src/classify",
+        "src/cutil",
+        "src/dict",
+        "src/lstm",
+        "src/textord",
+        "src/viewer",
+        "src/wordrec",
+    ],
+    local_include_dirs: ["src"],
+    cflags: [
+        "-DANDROID",
+        "-DGRAPHICS_DISABLED",
+        "-DDISABLED_LEGACY_ENGINE",
+        "-DHAVE_NEON",
+        "-Wno-error",
+        "-Wno-unused-parameter",
+        "-Wno-unused-function",
+    ],
+    cpp_std: "c++17",
+    cppflags: ["-fexceptions"],
+    static_libs: ["libleptonica"],
+}
